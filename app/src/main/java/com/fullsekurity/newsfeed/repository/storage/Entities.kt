@@ -16,7 +16,11 @@ data class Meaning(
     @SerializedName(value = "publishedAt") var publishedAt: String,
     @SerializedName(value = "content") var content: String
 
-) : Parcelable
+) : Parcelable, Comparable<Meaning> {
+
+    override fun compareTo(other: Meaning) = if (author < other.author) -1 else (if (author > other.author) 1 else 0)
+
+}
 
 @Parcelize
 data class Source(

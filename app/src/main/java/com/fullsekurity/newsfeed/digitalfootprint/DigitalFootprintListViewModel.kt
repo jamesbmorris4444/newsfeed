@@ -68,7 +68,18 @@ class DigitalFootprintListViewModel(private val callbacks: Callbacks) : Recycler
             listIsVisible.set(false)
         } else {
             listIsVisible.set(meaningsList.isNotEmpty())
-            adapter.addAll(meaningsList.sortedBy { meaning -> meaning.author })
+            val sortedMeaningsList: MutableList<Any> = meaningsList.sortedBy { meaning -> meaning.author }.toMutableList()
+            val indexList: MutableList<Int> = mutableListOf()
+            val headerList: MutableList<String> = mutableListOf()
+            for (c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ") {
+                val index = sortedMeaningsList.binarySearchBy(c.toString()) { meaning -> (meaning as Meaning).author }
+                indexList.add(0, -(index + 1))
+                headerList.add(0, c.toString())
+            }
+            for (k in indexList.indices) {
+                sortedMeaningsList.add(indexList[k], headerList[k])
+            }
+            adapter.addAll(sortedMeaningsList)
         }
     }
 

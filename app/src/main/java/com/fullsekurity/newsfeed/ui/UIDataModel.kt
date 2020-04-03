@@ -74,7 +74,7 @@ class UIDataModel {
                         "largeTextBold",
                         "error",
                         "mainTitleBold",
-                        "blue",
+                        "black",
 
                         "error",
                         "mainTitle",
@@ -177,7 +177,7 @@ class UIDataModel {
                         "largeText",
                         "error",
                         "mainTitleBold",
-                        "cyan",
+                        "black",
 
                         "error",
                         "mainTitle",

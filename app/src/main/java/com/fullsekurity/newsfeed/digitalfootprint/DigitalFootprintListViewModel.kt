@@ -28,7 +28,6 @@ class DigitalFootprintListViewModel(private val callbacks: Callbacks) : Recycler
     override var adapter: DigitalFootprintAdapter = DigitalFootprintAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
-    val submitVisible: ObservableField<Int> = ObservableField(View.GONE)
 
     @Inject
     lateinit var uiViewModel: UIViewModel

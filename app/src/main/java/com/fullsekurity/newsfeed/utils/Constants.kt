@@ -22,7 +22,7 @@ object Constants {
     const val STANDARD_BUTTON_HEIGHT = 50f
     const val STANDARD_GRID_HEIGHT = 120f
     const val EDIT_TEXT_TO_BUTTON_RATIO = 3  // 3:1
-    const val URBANDICT_TITLE = "NewsAPI.org Results"
+    const val URBANDICT_TITLE = "Digital Footprint"
 
 
 }

@@ -2,6 +2,9 @@ package com.fullsekurity.newsfeed.utils
 
 import androidx.lifecycle.ViewModelProvider
 import com.fullsekurity.newsfeed.activity.MainActivity
+import com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintAdapter
+import com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintFragment
+import com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintListViewModel
 import com.fullsekurity.newsfeed.meanings.MeaningsAdapter
 import com.fullsekurity.newsfeed.meanings.MeaningsFragment
 import com.fullsekurity.newsfeed.meanings.MeaningsListViewModel
@@ -25,10 +28,13 @@ interface MapperDependencyInjector {
 @Component(modules = [ViewModelInjectorModule::class])
 interface ViewModelDependencyInjector {
     fun inject(fragment: MeaningsFragment)
+    fun inject(fragment: DigitalFootprintFragment)
     fun inject(modal: StandardModal)
     fun inject(viewModel: MeaningsListViewModel)
+    fun inject(viewModel: DigitalFootprintListViewModel)
     fun inject(activity: MainActivity)
     fun inject(adapter: MeaningsAdapter)
+    fun inject(adapter: DigitalFootprintAdapter)
 }
 
 @Module

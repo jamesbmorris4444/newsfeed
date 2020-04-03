@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+        <variable
+            name="uiViewModel"
+            type="com.fullsekurity.newsfeed.ui.UIViewModel" />
+        <variable
+            name="digitalFootprintItemViewModel"
+            type="com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/meanings_item_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <android.widget.ImageView
+            android:id="@+id/news_image"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:picasso_src="@{digitalFootprintItemViewModel.urlToImage}"
+            android:scaleType="fitXY"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/news_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/news_image" >
+
+            <android.widget.TextView
+                android:id="@+id/author"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{digitalFootprintItemViewModel.author}"
+                app:text_font="@{uiViewModel.wordItemTextTypeface}"
+                app:text_color="@{uiViewModel.wordItemTextColor}"
+                app:text_size="@{safeUnbox(uiViewModel.wordItemTextSize)}"
+                app:layout_marginLeft="@{safeUnbox(uiViewModel.standardLeftAndRightMargin)}"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/title"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <android.widget.TextView
+                android:id="@+id/title"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:text="@{digitalFootprintItemViewModel.title}"
+                app:text_font="@{uiViewModel.meaningsItemTextTypeface}"
+                app:text_color="@{uiViewModel.definitionItemTextColor}"
+                app:text_size="@{safeUnbox(uiViewModel.meaningsItemTextSize)}"
+                app:layout_marginLeft="@{safeUnbox(uiViewModel.standardLeftAndRightMargin)}"
+                app:layout_constraintTop_toBottomOf="@+id/author"
+                app:layout_constraintBottom_toTopOf="@+id/source"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <android.widget.TextView
+                android:id="@+id/source"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@{digitalFootprintItemViewModel.source}"
+                app:text_font="@{uiViewModel.meaningsItemTextTypeface}"
+                app:text_color="@{uiViewModel.meaningsItemTextColor}"
+                app:text_size="@{safeUnbox(uiViewModel.meaningsItemTextSize)}"
+                app:layout_marginLeft="@{safeUnbox(uiViewModel.standardLeftAndRightMargin)}"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/top_divider"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:background_color="@{uiViewModel.standardDialogDividerColor}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

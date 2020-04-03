@@ -8,13 +8,12 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.*
+import android.os.Bundle
+import android.os.IBinder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -24,6 +23,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.fullsekurity.newsfeed.R
 import com.fullsekurity.newsfeed.databinding.ActivityMainBinding
+import com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintFragment
+import com.fullsekurity.newsfeed.digitalfootprint.DigitalFootprintListViewModel
 import com.fullsekurity.newsfeed.logger.LogUtils
 import com.fullsekurity.newsfeed.meanings.MeaningsFragment
 import com.fullsekurity.newsfeed.meanings.MeaningsListViewModel
@@ -36,7 +37,6 @@ import com.fullsekurity.newsfeed.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.newsfeed.utils.ViewModelInjectorModule
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 
@@ -101,7 +101,8 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     override fun onResume() {
         super.onResume()
         setupToolbar()
-        uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+//        uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+        uiViewModel.lottieAnimation(lottieBackgroundView, "", LottieDrawable.INFINITE)
 
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: bindService in onResume()"))
         val intent = Intent(this, LongRunningService::class.java)
@@ -153,7 +154,8 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
 
     private fun loadInitialFragment() {
         if (supportFragmentManager.findFragmentByTag(ROOT_FRAGMENT_TAG) == null) {
-            loadMeaningsFragment()
+//            loadMeaningsFragment()
+            loadDigitalFootprintFragment()
         }
     }
 
@@ -162,6 +164,14 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
             .replace(R.id.main_activity_container, MeaningsFragment.newInstance(), ROOT_FRAGMENT_TAG)
+            .commitAllowingStateLoss()
+    }
+
+    private fun loadDigitalFootprintFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+            .replace(R.id.main_activity_container, DigitalFootprintFragment.newInstance(), ROOT_FRAGMENT_TAG)
             .commitAllowingStateLoss()
     }
 
@@ -204,7 +214,8 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
                 currentTheme = UITheme.LIGHT
             }
             uiViewModel.currentTheme = currentTheme
-            uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+//            uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+            uiViewModel.lottieAnimation(lottieBackgroundView, "", LottieDrawable.INFINITE)
             setupToolbar()
             true
         }
@@ -238,6 +249,8 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         return activityMainBinding.root
     }
 
-    override fun fetchmeaningsListViewModel() : MeaningsListViewModel? { return null }
+    override fun fetchMeaningsListViewModel() : MeaningsListViewModel? { return null }
+
+    override fun fetchDigitalFootprintListViewModel() : DigitalFootprintListViewModel? { return null }
 
 }

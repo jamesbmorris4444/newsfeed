@@ -24,7 +24,7 @@ class Repository(private val callbacks: Callbacks) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .timeout(15L, TimeUnit.SECONDS)
-            .subscribe ({ meaningsResponse ->
+            .subscribe({ meaningsResponse ->
                 disposable?.dispose()
                 showMeanings(meaningsResponse.articles)
             },

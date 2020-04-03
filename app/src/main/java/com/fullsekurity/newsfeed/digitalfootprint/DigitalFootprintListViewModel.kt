@@ -72,8 +72,8 @@ class DigitalFootprintListViewModel(private val callbacks: Callbacks) : Recycler
             val indexList: MutableList<Int> = mutableListOf()
             val headerList: MutableList<String> = mutableListOf()
             for (c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-                val index = sortedMeaningsList.binarySearchBy(c.toString()) { meaning -> (meaning as Meaning).author }
-                indexList.add(0, -(index + 1))
+                val insertionPoint = sortedMeaningsList.binarySearchBy(c.toString()) { meaning -> (meaning as Meaning).author }
+                indexList.add(0, -(insertionPoint + 1))
                 headerList.add(0, c.toString())
             }
             for (k in indexList.indices) {

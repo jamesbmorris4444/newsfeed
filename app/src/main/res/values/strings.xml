@@ -18,4 +18,7 @@
     <string name="search_no_elements">No News Feeds found</string>
     <string name="meanings_hint_text">Enter Search Term</string>
 
+    <string name="john_doe_email">john.doe@gmail.com</string>
+    <string name="change">Change</string>
+
 </resources>

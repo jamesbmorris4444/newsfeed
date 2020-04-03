@@ -12,7 +12,7 @@ data class Meaning(
     @SerializedName(value = "title") var title: String,
     @SerializedName(value = "description") var description: String,
     @SerializedName(value = "url") var url: String,
-    @SerializedName(value = "urlToImage") var urlToImage: String,
+    @SerializedName(value = "urlToImage") var urlToImage: String?,
     @SerializedName(value = "publishedAt") var publishedAt: String,
     @SerializedName(value = "content") var content: String
 

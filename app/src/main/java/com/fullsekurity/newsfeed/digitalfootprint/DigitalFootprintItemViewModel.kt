@@ -22,10 +22,14 @@ class DigitalFootprintItemViewModel(private val callbacks: Callbacks) : Recycler
         title.set(item.title)
         description.set(item.description)
         url.set(item.url)
-        if (item.urlToImage.isEmpty()) {
+        item.urlToImage?.let {
+            if (it.isEmpty()) {
+                urlToImage.set("https://images.barrons.com/im-150385/social")
+            } else {
+                urlToImage.set(it)
+            }
+        } ?: run {
             urlToImage.set("https://images.barrons.com/im-150385/social")
-        } else {
-            urlToImage.set(item.urlToImage)
         }
         publishedAt.set(item.publishedAt)
         content.set(item.content)

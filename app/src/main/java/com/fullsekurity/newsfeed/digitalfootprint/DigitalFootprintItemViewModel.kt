@@ -5,7 +5,9 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
+import com.fullsekurity.newsfeed.R
 import com.fullsekurity.newsfeed.activity.Callbacks
 import com.fullsekurity.newsfeed.recyclerview.RecyclerViewItemViewModel
 import com.fullsekurity.newsfeed.repository.storage.Meaning
@@ -35,19 +37,16 @@ class DigitalFootprintItemViewModel(private val callbacks: Callbacks) : Recycler
     }
 
     private fun circDrawable(): Drawable {
-        val circularView = CircularView(callbacks.fetchActivity())
+        val outerColor = ContextCompat.getColor(callbacks.fetchActivity(), R.color.blue)
+        val innerColor = ContextCompat.getColor(callbacks.fetchActivity(), R.color.darkgreen)
+        val circularView = CircularView(callbacks.fetchActivity(), 6, 8, outerColor, 4, 8, innerColor)
         return BitmapDrawable(callbacks.fetchActivity().resources, createBitmapFromView(circularView))
     }
 
-    fun createBitmapFromView(view: View): Bitmap {
+    private fun createBitmapFromView(view: View): Bitmap {
         view.layout(0, 0, 160, 160)
-        val bitmap = Bitmap.createBitmap(
-            160,
-            160, Bitmap.Config.ARGB_8888
-        )
+        val bitmap = Bitmap.createBitmap(160,160, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-//        val background: Drawable = view.getBackground()
-//        background?.draw(canvas)
         view.draw(canvas)
         return bitmap
     }

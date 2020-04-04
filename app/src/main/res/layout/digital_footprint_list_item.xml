@@ -18,9 +18,9 @@
 
         <android.widget.ImageView
             android:id="@+id/news_image"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:picasso_src="@{digitalFootprintItemViewModel.urlToImage}"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@{digitalFootprintItemViewModel.circularDrawable}"
             android:scaleType="fitXY"
             android:layout_marginStart="20dp"
             app:layout_constraintTop_toTopOf="parent"

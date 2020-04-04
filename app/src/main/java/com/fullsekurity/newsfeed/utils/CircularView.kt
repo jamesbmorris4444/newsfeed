@@ -13,9 +13,11 @@ class CircularView(
     private val percentNumeratorOuter: Int,
     private val percentDenominatorOuter: Int,
     private val colorOuter: Int,
+    private val colorOuterLight: Int,
     private val percentNumeratorInner: Int,
     private val percentDenominatorInner: Int,
-    private val colorInner: Int) : View(ctxt) {
+    private val colorInner: Int,
+    private val colorInnerLight: Int) : View(ctxt) {
 
     private val path = Path()
     private val paint = Paint()
@@ -23,7 +25,9 @@ class CircularView(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // width and height are always equal, so use width as the diameter
+        drawCircle(canvas, colorOuterLight, width.toFloat(), width.toFloat(), percentDenominatorOuter, percentDenominatorOuter)
         drawCircle(canvas, colorOuter, width.toFloat(), width.toFloat(), percentNumeratorOuter, percentDenominatorOuter)
+        drawCircle(canvas, colorInnerLight, width.toFloat(),width.toFloat() * 0.7f, percentDenominatorInner, percentDenominatorInner)
         drawCircle(canvas, colorInner, width.toFloat(),width.toFloat() * 0.7f, percentNumeratorInner, percentDenominatorInner)
     }
 
@@ -32,7 +36,7 @@ class CircularView(
         val radius = 7 * diameter / 16
         path.addCircle(0f, 0f, radius, Path.Direction.CW)
         paint.color = color
-        paint.strokeWidth = 10f
+        paint.strokeWidth = 50f
         paint.style = Paint.Style.STROKE
         val centerX = boundingBoxWidth / 2
         val centerY = boundingBoxWidth / 2

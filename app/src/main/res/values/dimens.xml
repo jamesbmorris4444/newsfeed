@@ -7,4 +7,5 @@
     <dimen name="card_movie_radius">0dp</dimen>
     <dimen name="user_rating">12sp</dimen>
     <dimen name="card_margin">5dp</dimen>
+    <dimen name="circle_bounding_box">60dp</dimen>
 </resources>

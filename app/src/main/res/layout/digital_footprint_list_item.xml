@@ -18,8 +18,8 @@
 
         <android.widget.ImageView
             android:id="@+id/news_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/circle_bounding_box"
+            android:layout_height="@dimen/circle_bounding_box"
             android:src="@{digitalFootprintItemViewModel.circularDrawable}"
             android:scaleType="fitXY"
             android:layout_marginStart="20dp"

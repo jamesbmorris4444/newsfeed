@@ -21,4 +21,7 @@
     <string name="john_doe_email">john.doe@gmail.com</string>
     <string name="change">Change</string>
 
+    <string name="outer_string">Types of info collected: </string>
+    <string name="inner_string">Ways my info is used:</string>
+
 </resources>

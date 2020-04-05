@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import java.util.*
 
 object APIClient {
     val client: APIInterface
@@ -62,15 +63,59 @@ class TransformInterceptor : Interceptor {
     }
 
     private fun replaceAuthor(jsonArray: JSONArray) : JSONArray {
+        val listNumber: MutableList<Int> = mutableListOf()
+        val random = Random()
+        var company: String
         for (index in 0 until jsonArray.length()) {
             val stringJson = jsonArray[index].toString()
             val jsonObject = JSONObject(stringJson)
-            jsonObject.get("author")?.let {
-                if (it.toString().isEmpty() || it.toString() == "null") {
-                    (jsonArray[index] as JSONObject).put("author", "AUTHOR MISSING")
+            var rand: Int
+            while (true) {
+                rand = random.nextInt(jsonArray.length())
+                if (!listNumber.contains(rand)) {
+                    listNumber.add(rand)
+                    break
                 }
+            }
+            company = when (rand) {
+                0 -> { "Amazon" }
+                1 -> { "Best Buy" }
+                2 -> { "Hobby Lobby" }
+                3 -> { "Michaels" }
+                4 -> { "Dillards" }
+                5 -> { "Nordstrom" }
+                6 -> { "Macys" }
+                7 -> { "Sylvesters" }
+                8 -> { "Tommy Bahama" }
+                9 -> { "Sears" }
+                10 -> { "EBay" }
+                11 -> { "Lowes" }
+                12 -> { "Home Depot" }
+                13 -> { "Office Depot" }
+                14 -> { "Trulucks" }
+                15 -> { "Cheesecake Factory" }
+                16 -> { "P F Changs" }
+                17 -> { "Red Lobster" }
+                18 -> { "Mings" }
+                19 -> { "BMW" }
+                else -> { "Zulu" }
+            }
+            jsonObject.get("author")?.let {
+                (jsonArray[index] as JSONObject).put("author", company)
             } ?: run {
-                (jsonArray[index] as JSONObject).put("author", "AUTHOR MISSING")
+                (jsonArray[index] as JSONObject).put("author", "NO COMPANY")
+            }
+            val percentNumeratorOuter = random.nextInt(9)
+            jsonObject.get("title")?.let {
+                (jsonArray[index] as JSONObject).put("title", percentNumeratorOuter.toString())
+            } ?: run {
+                (jsonArray[index] as JSONObject).put("title", "-1")
+            }
+            val percentNumeratorInner = random.nextInt(9)
+            jsonObject.get("description")?.let {
+                (jsonArray[index] as JSONObject).put("description", percentNumeratorInner.toString())
+            } ?: run {
+                (jsonArray[index] as JSONObject).put("description", "-1")
             }
             jsonArray
         }

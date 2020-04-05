@@ -44,7 +44,6 @@ class CircularView(
         // right start: 0, bottom start: 90, left start: 180, top start: 270
         // sweep is clockwise
         canvas.drawArc(oval, 270f, 360f * percentNumerator / percentDenominator, false, paint)
-
     }
 
 }

@@ -111,7 +111,7 @@ class TransformInterceptor : Interceptor {
             } ?: run {
                 (jsonArray[index] as JSONObject).put("title", "-1")
             }
-            val percentNumeratorInner = random.nextInt(9)
+            val percentNumeratorInner = random.nextInt(6)
             jsonObject.get("description")?.let {
                 (jsonArray[index] as JSONObject).put("description", percentNumeratorInner.toString())
             } ?: run {

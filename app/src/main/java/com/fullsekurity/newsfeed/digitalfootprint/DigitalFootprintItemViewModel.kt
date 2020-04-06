@@ -17,27 +17,30 @@ import com.fullsekurity.newsfeed.utils.CircularView
 
 class DigitalFootprintItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
 
+    private val OUTER_DENOMINATOR = 8
+    private val INNER_DENOMINATOR = 5
+
     val source: ObservableField<String> = ObservableField("")
     val author: ObservableField<String> = ObservableField("")
     val title: ObservableField<String> = ObservableField("")
     val description: ObservableField<String> = ObservableField("")
     val url: ObservableField<String> = ObservableField("")
-    val circularDrawable: ObservableField<Drawable> = ObservableField()
+    val circularImage: ObservableField<Drawable> = ObservableField()
     val publishedAt: ObservableField<String> = ObservableField("")
     val content: ObservableField<String> = ObservableField("")
 
     override fun setItem(item: Meaning) {
         author.set(item.author)
-        title.set("${item.title}/8")
+        title.set("${item.title}/$OUTER_DENOMINATOR")
         source.set(item.source.name)
-        description.set("${item.description}/8")
+        description.set("${item.description}/$INNER_DENOMINATOR")
         url.set(item.url)
-        circularDrawable.set(circDrawable(item))
+        circularImage.set(circularDrawable(item))
         publishedAt.set(item.publishedAt)
         content.set(item.content)
     }
 
-    private fun circDrawable(item: Meaning): Drawable {
+    private fun circularDrawable(item: Meaning): Drawable {
         val outerColorNormal = ContextCompat.getColor(callbacks.fetchActivity(), R.color.blue)
         val innerColorNormal = ContextCompat.getColor(callbacks.fetchActivity(), R.color.darkGreen)
         val outerColorLight = ContextCompat.getColor(callbacks.fetchActivity(), R.color.blueLight)
@@ -46,15 +49,15 @@ class DigitalFootprintItemViewModel(private val callbacks: Callbacks) : Recycler
         var percentNumeratorOuter = item.title.toInt()
         if (percentNumeratorOuter == 0) {
             outerColor = outerColorLight
-            percentNumeratorOuter = 8
+            percentNumeratorOuter = OUTER_DENOMINATOR
         }
         var innerColor = innerColorNormal
         var percentNumeratorInner = item.description.toInt()
         if (percentNumeratorInner == 0) {
             innerColor = innerColorLight
-            percentNumeratorInner = 8
+            percentNumeratorInner = INNER_DENOMINATOR
         }
-        val circularView = CircularView(callbacks.fetchActivity(), percentNumeratorOuter, 8, outerColor, outerColorLight, percentNumeratorInner, 8, innerColor, innerColorLight)
+        val circularView = CircularView(callbacks.fetchActivity(), percentNumeratorOuter, OUTER_DENOMINATOR, outerColor, outerColorLight, percentNumeratorInner, INNER_DENOMINATOR, innerColor, innerColorLight)
         return BitmapDrawable(callbacks.fetchActivity().resources, createBitmapFromView(circularView))
     }
 
